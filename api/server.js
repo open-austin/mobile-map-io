@@ -135,7 +135,7 @@ router.get("/reports/:id", function(req, res) {
                     var reqid = Number(req.params.id.substring(0, req.params.id.indexOf('_')));
                     var refid = Number(refuge[i].id.substring(0, refuge[i].id.indexOf('_')));
                     if (reqid == refid) {
-                        rows = refuge[i];
+                        rows.push(refuge[i]);
                         break;
                     }
                 }
