@@ -55,7 +55,8 @@ function prepRefuge(refuge) {
         refuge[i]['notes'] = r.comment;
         refuge[i]['lat'] = r.latitude;
         refuge[i]['lng'] = r.longitude;
-        refuge[i]['place'] = r.name + ', ' + r.street + ', ' + r.city + ', ' + r.state + ', ' + r.country;;
+        refuge[i]['place'] = r.name + ', ' + r.street + ', ' + r.city + ', ' + r.state + ', ' + r.country;
+        refuge[i]['active'] = 1;
 
         delete refuge[i].name;
         delete refuge[i].street;
