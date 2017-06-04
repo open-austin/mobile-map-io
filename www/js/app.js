@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mobile-map-io', [
+angular.module('restroom-map', [
     'ionic',
     'uiGmapgoogle-maps',
     'controllers',

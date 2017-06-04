@@ -55,7 +55,7 @@ cloudinary.config({
 // Get API info
 router.get("/", function(req, res) {
     res.json({
-        "Message": "This is the mobile-map-io API"
+        "Message": "This is the restroom-map API"
     });
 });
 
@@ -286,5 +286,5 @@ app.use(allowCrossDomain);
 app.use(process.env.APIPATH, router);
 connection.init();
 var server = app.listen(process.env.PORT, function() {
-    console.log('mobile-map-io API listening at port ' + server.address().port);
+    console.log('restroom-map API listening at port ' + server.address().port);
 });

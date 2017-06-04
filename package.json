@@ -1,5 +1,5 @@
 {
-    "name": "mobile-map-io",
+    "name": "restroom-map",
     "version": "1.0.0",
     "description": "This is a boilerplate mobile hybrid app for I/O with maps.",
     "dependencies": {
