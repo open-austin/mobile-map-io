@@ -91,8 +91,8 @@ router.get("/reports", function(req, res) {
                             refuge[i]['notes'] = r.comment;
                             refuge[i]['lat'] = r.latitude;
                             refuge[i]['lng'] = r.longitude;
-                            var place = r.name + ', ' + r.street + ', ' + r.city + ', ' + r.state;
-                            refuge[i]['place'] = place;
+                            refuge[i]['place'] = r.name + ', ' + r.street + ', ' + r.city + ', ' + r.state + ', ' + r.country;;
+
                             delete refuge[i].name;
                             delete refuge[i].street;
                             delete refuge[i].city;
@@ -102,6 +102,7 @@ router.get("/reports", function(req, res) {
                             delete refuge[i].created_at;
                             delete refuge[i].latitude;
                             delete refuge[i].longitude;
+                            delete refuge[i].country;
                         }
                         for (var i=0; i<rows.length; ++i) {
                             rows[i]['source'] = 'self';
