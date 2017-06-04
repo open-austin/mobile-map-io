@@ -286,7 +286,7 @@ router.post("/reports", function(req, res) {
         } else {
             table = [
                 "reports", "directions", "place", "lat", "lng",
-                "accessible", "changing_table", "unisex", "source"
+                "accessible", "changing_table", "unisex", "source",
                 report.directions, report.place, report.lat, report.lng,
                 report.accessible, report.changing_table, report.unisex, report.source
             ];
