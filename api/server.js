@@ -46,6 +46,31 @@ function allowCrossDomain(req, res, next) {
     }
 };
 
+function prepRefuge(refuge) {
+    for (var i=0; i<refuge.length; ++i) {
+        var r = refuge[i];
+        refuge[i].id += '_refuge';
+        refuge[i]['source'] = 'refuge';
+        refuge[i]['datetime_reported'] = r.updated_at;
+        refuge[i]['notes'] = r.comment;
+        refuge[i]['lat'] = r.latitude;
+        refuge[i]['lng'] = r.longitude;
+        refuge[i]['place'] = r.name + ', ' + r.street + ', ' + r.city + ', ' + r.state + ', ' + r.country;;
+
+        delete refuge[i].name;
+        delete refuge[i].street;
+        delete refuge[i].city;
+        delete refuge[i].state;
+        delete refuge[i].comment;
+        delete refuge[i].updated_at;
+        delete refuge[i].created_at;
+        delete refuge[i].latitude;
+        delete refuge[i].longitude;
+        delete refuge[i].country;
+    }
+    return refuge;
+}
+
 // Routes
 var api = process.env.APIPATH;
 var columns = ["datetime_occurred", "why", "what", "which", "place", "lat", "lng"];
@@ -82,31 +107,7 @@ router.get("/reports", function(req, res) {
                             "reports": rows
                         });
                     } else {
-                        var refuge = JSON.parse(body);
-                        for (var i=0; i<refuge.length; ++i) {
-                            var r = refuge[i];
-                            refuge[i].id += '_refuge';
-                            refuge[i]['source'] = 'refuge';
-                            refuge[i]['datetime_reported'] = r.updated_at;
-                            refuge[i]['notes'] = r.comment;
-                            refuge[i]['lat'] = r.latitude;
-                            refuge[i]['lng'] = r.longitude;
-                            refuge[i]['place'] = r.name + ', ' + r.street + ', ' + r.city + ', ' + r.state + ', ' + r.country;;
-
-                            delete refuge[i].name;
-                            delete refuge[i].street;
-                            delete refuge[i].city;
-                            delete refuge[i].state;
-                            delete refuge[i].comment;
-                            delete refuge[i].updated_at;
-                            delete refuge[i].created_at;
-                            delete refuge[i].latitude;
-                            delete refuge[i].longitude;
-                            delete refuge[i].country;
-                        }
-                        for (var i=0; i<rows.length; ++i) {
-                            rows[i]['source'] = 'self';
-                        }
+                        var refuge = prepRefuge(JSON.parse(body));
                         rows = rows.concat(refuge);
                         res.json({
                             "reports": rows
