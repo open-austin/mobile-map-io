@@ -3,8 +3,11 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
+var request = require('request');
 var cloudinary = require('cloudinary');
 var dotenv = require('dotenv').config({path: __dirname + '/.env'});
+
+var refugeUrl = 'http://www.refugerestrooms.org/api/v1/';
 
 // Configure database connection
 function Connection() {
@@ -72,8 +75,42 @@ router.get("/reports", function(req, res) {
                     "error": err
                 });
             } else {
-                res.json({
-                    "reports": rows
+                request(refugeUrl + 'restrooms.json', function (error, response, body) {
+                    if (error) {
+                        console.error(error);
+                        res.json({
+                            "reports": rows
+                        });
+                    } else {
+                        var refuge = JSON.parse(body);
+                        for (var i=0; i<refuge.length; ++i) {
+                            var r = refuge[i];
+                            refuge[i].id += '_refuge';
+                            refuge[i]['source'] = 'refuge';
+                            refuge[i]['datetime_reported'] = r.updated_at;
+                            refuge[i]['notes'] = r.comment;
+                            refuge[i]['lat'] = r.latitude;
+                            refuge[i]['lng'] = r.longitude;
+                            var place = r.name + ', ' + r.street + ', ' + r.city + ', ' + r.state;
+                            refuge[i]['place'] = place;
+                            delete refuge[i].name;
+                            delete refuge[i].street;
+                            delete refuge[i].city;
+                            delete refuge[i].state;
+                            delete refuge[i].comment;
+                            delete refuge[i].updated_at;
+                            delete refuge[i].created_at;
+                            delete refuge[i].latitude;
+                            delete refuge[i].longitude;
+                        }
+                        for (var i=0; i<rows.length; ++i) {
+                            rows[i]['source'] = 'self';
+                        }
+                        rows = rows.concat(refuge);
+                        res.json({
+                            "reports": rows
+                        });
+                    }
                 });
             }
         });
