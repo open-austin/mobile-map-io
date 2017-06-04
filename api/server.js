@@ -58,6 +58,8 @@ function prepRefuge(refuge) {
         refuge[i]['place'] = r.name + ', ' + r.street + ', ' + r.city + ', ' + r.state + ', ' + r.country;
         refuge[i]['active'] = 1;
         refuge[i]['changing_table'] = refuge[i]['changing_table'] ? 1 : 0;
+        refuge[i]['accessible'] = refuge[i]['changing_table'] ? 1 : 0;
+        refuge[i]['unisex'] = refuge[i]['changing_table'] ? 1 : 0;
 
         delete refuge[i].name;
         delete refuge[i].street;
