@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `datetime_reported` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `what` text COMMENT 'What is it',
   `photo` text COMMENT 'URL to photo for this report',
+  `source` text COMMENT 'source of information',
   `which` tinyint(1) DEFAULT NULL COMMENT 'Which is it?',
   `why` varchar(255) DEFAULT NULL COMMENT 'Why?',
   `place` varchar(255) DEFAULT NULL COMMENT 'Friendly name of report place',
