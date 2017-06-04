@@ -105,7 +105,7 @@ router.get("/reports", function(req, res) {
                     "error": err
                 });
             } else {
-                request(refugeUrl + 'restrooms.json', function (error, response, body) {
+                request(refugeUrl + 'restrooms.json?per_page=100', function (error, response, body) {
                     if (error) {
                         console.error(error);
                         res.json({
@@ -127,7 +127,8 @@ router.get("/reports", function(req, res) {
 // Get report by id
 router.get("/reports/:id", function(req, res) {
     if (req.params.id.includes('_refuge')) {
-        request(refugeUrl + 'restrooms.json', function (error, response, body) {
+        var url = refugeUrl + 'restrooms/by_location.json?lat=30.231&lng=-97.757&per_page=100';
+        request(url, function (error, response, body) {
             if (error) {
                 res.status(500).json({
                     "error": err
@@ -188,7 +189,7 @@ router.post("/reports/nearby", function(req, res) {
                 });
             } else {
                 var url = refugeUrl + 'restrooms/by_location.json?lat=' + req.body.myLat + '&lng=' + req.body.myLng;
-                console.log(url);
+                console.log(url + '&per_page=100');
                 request(url, function (error, response, body) {
                     if (error) {
                         console.error(error);
