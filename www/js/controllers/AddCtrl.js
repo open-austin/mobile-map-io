@@ -226,6 +226,7 @@ angular.module('controllers')
         reportJson.active = true;
         reportJson.lat = $scope.search.lat;
         reportJson.lng = $scope.search.lng;
+        // reportJson.source = 'self';
         var promise = API.addReport(reportJson);
         promise.then(
             function (payload) {

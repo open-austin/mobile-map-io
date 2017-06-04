@@ -77,21 +77,22 @@ angular.module('controllers')
                     if (kmAway <= 50000) {//based on earth circumference
                         $scope.updateReportsInBounds(kmAway*10);
                     } else {
-                        console.log("there don't seem to be any reports at all");
+                        console.log("there doesn't seem to be any reports at all");
                     }
                 } else {
                     var reports = payload.data.reports;
                     for (var i=0; i<reports.length; ++i) {
                         var report = reports[i];
                         if (report.active) {
-                            var distance = (0 == report.distance) ? '<0.1' : report.distance;
+                            var distance = (0 == report.distance) ? '<0.1' : report.distance.toFixed(2);
                             var marker = {
                                 latitude: report.lat,
                                 longitude: report.lng,
                                 place: report.place,
                                 notes: report.notes,
                                 id: report.id,
-                                distance: distance
+                                distance: distance,
+                                source: report.source || 'self'
                             };
                             $scope.reports.markers.push(marker);
                         }

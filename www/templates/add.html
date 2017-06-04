@@ -55,28 +55,38 @@
                         </ui-gmap-marker>
                     </ui-gmap-google-map>
                 </div>
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">What is it?</span>
-                    <textarea   name="what"
-                                ng-model="form.what"
-                                placeholder="What is it?"
-                                rows="1">
-                    </textarea>
-                </label>
                 <div class="item item-stacked-label">
-                    <label class="input-label has-input" for="which">
-                        Which is it?
+                    <label class="input-label has-input" for="accessible">
+                        Is it ADA accessible?
                     </label>
-                    <div class="button-bar" id="which">
-                        <a grouped-radio="1" ng-model="form.which">Yes</a>
-                        <a grouped-radio="0" ng-model="form.which">No</a>
+                    <div class="button-bar" id="accessible">
+                        <a grouped-radio="1" ng-model="form.accessible">Yes</a>
+                        <a grouped-radio="0" ng-model="form.accessible">No</a>
+                    </div>
+                </div>
+                <div class="item item-stacked-label">
+                    <label class="input-label has-input" for="changing_table">
+                        Does it have a changing table?
+                    </label>
+                    <div class="button-bar" id="changing_table">
+                        <a grouped-radio="1" ng-model="form.changing_table">Yes</a>
+                        <a grouped-radio="0" ng-model="form.changing_table">No</a>
+                    </div>
+                </div>
+                <div class="item item-stacked-label">
+                    <label class="input-label has-input" for="unisex">
+                        Unisex?
+                    </label>
+                    <div class="button-bar" id="unisex">
+                        <a grouped-radio="1" ng-model="form.unisex">Yes</a>
+                        <a grouped-radio="0" ng-model="form.unisex">No</a>
                     </div>
                 </div>
                 <label class="item item-input item-floating-label">
-                    <span class="input-label">Why</span>
-                    <textarea   name="why"
-                                ng-model="form.why"
-                                placeholder="Why?"
+                    <span class="input-label">Directions</span>
+                    <textarea   name="directions"
+                                ng-model="form.directions"
+                                placeholder="Directions to the restroom"
                                 rows="3">
                 </textarea>
             </label>

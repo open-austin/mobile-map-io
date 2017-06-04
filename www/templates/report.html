@@ -18,28 +18,31 @@
                 <div class="item item-divider">
                     {{whenReported}}
                 </div>
-                <label class="item item-input item-floating-label"
-                         ng-hide="form.what === null">
-                    <span class="input-label">What is it?</span>
-                    <textarea   name="what"
-                                ng-model="form.what"
-                                placeholder="What is it?"
-                                rows="1"
-                                disabled>
-                    </textarea>
-                </label>
-                <label class="item" ng-hide="form.which === null">
-                    Which is it?
-                    <span class="badge badge-{{form.which ? 'stable' : 'assertive'}}">
-                        {{form.which ? 'YES' : 'NO'}}
+                <label class="item" ng-hide="form.accessible === null">
+                    Is it ADA accessible?
+                    <span class="badge badge-{{form.accessible ? 'stable' : 'assertive'}}">
+                        {{form.accessible ? 'YES' : 'NO'}}
                     </span>
                 </label>
-                <label class="item item-input item-floating-label" ng-hide="form.notes === null">
-                    <span class="input-label">Why?</span>
-                    <textarea   name="why"
-                                ng-model="form.why"
-                                placeholder="Why?"
-                                rows="2"
+                <label class="item" ng-hide="form.changing_table === null">
+                    Does it have a changing table?
+                    <span class="badge badge-{{form.changing_table ? 'stable' : 'assertive'}}">
+                        {{form.changing_table ? 'YES' : 'NO'}}
+                    </span>
+                </label>
+                <label class="item" ng-hide="form.unisex === null">
+                    Unisex?
+                    <span class="badge badge-{{form.unisex ? 'stable' : 'assertive'}}">
+                        {{form.unisex ? 'YES' : 'NO'}}
+                    </span>
+                </label>
+                <label class="item item-input item-floating-label"
+                         ng-hide="form.directions === null">
+                    <span class="input-label">Directions</span>
+                    <textarea   name="directions"
+                                ng-model="form.directions"
+                                placeholder="Directions"
+                                rows="1"
                                 disabled>
                     </textarea>
                 </label>

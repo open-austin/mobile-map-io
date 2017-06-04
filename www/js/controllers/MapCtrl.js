@@ -262,9 +262,17 @@ angular.module('controllers')
                                 longitude: report.lng,
                                 title: report.place,
                                 id: report.id,
-                                distance: distance
+                                distance: distance,
+                                source: report.source || 'self'
                             };
                             $scope.reports.markers.push(marker);
+
+                            // TODO: get marker to display based on origin of data point
+                            if (marker.source === 'refuge') {
+                                $scope.reports.options.icon.url = 'img/location-refuge.png';
+                            } else {
+                                $scope.reports.options.icon.url = 'img/location.png';
+                            }
                         }
                     }
                     $scope.filterReports();
