@@ -121,23 +121,47 @@ router.get("/reports", function(req, res) {
 
 // Get report by id
 router.get("/reports/:id", function(req, res) {
-    var query = "SELECT * FROM ?? WHERE ??=?";
-    var table = ["reports", "id", req.params.id];
-    query = mysql.format(query, table);
-    connection.acquire(function(err, con) {
-        con.query(query, function(err, rows) {
-            con.release();
-            if (err) {
+    if (req.params.id.includes('_refuge')) {
+        request(refugeUrl + 'restrooms.json', function (error, response, body) {
+            if (error) {
                 res.status(500).json({
                     "error": err
                 });
             } else {
+                var refuge = prepRefuge(JSON.parse(body));
+                var rows = [];
+                for (var i=0; i<refuge.length; ++i) {
+                    var reqid = Number(req.params.id.substring(0, req.params.id.indexOf('_')));
+                    var refid = Number(refuge[i].id.substring(0, refuge[i].id.indexOf('_')));
+                    if (reqid == refid) {
+                        rows = refuge[i];
+                        break;
+                    }
+                }
                 res.json({
                     "report": rows
                 });
             }
         });
-    });
+    } else {
+        var query = "SELECT * FROM ?? WHERE ??=?";
+        var table = ["reports", "id", req.params.id];
+        query = mysql.format(query, table);
+        connection.acquire(function(err, con) {
+            con.query(query, function(err, rows) {
+                con.release();
+                if (err) {
+                    res.status(500).json({
+                        "error": err
+                    });
+                } else {
+                    res.json({
+                        "report": rows
+                    });
+                }
+            });
+        });
+    }
 });
 
 // Get reports nearby
