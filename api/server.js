@@ -77,7 +77,8 @@ function prepRefuge(refuge) {
 
 // Routes
 var api = process.env.APIPATH;
-var columns = ["datetime_occurred", "why", "what", "which", "place", "lat", "lng"];
+var columns = ["datetime_occurred", "reports", "directions", "place", "lat", "lng",
+"accessible", "changing_table", "unisex", "source", "photo"];
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_KEY,
@@ -276,18 +277,18 @@ router.post("/reports", function(req, res) {
         var query = "";
         if (link) {
             table = [
-                "reports", "why", "place", "lat", "lng",
-                "what", "which", "photo",
-                report.why, report.place, report.lat, report.lng,
-                report.what, report.which, link
+                "reports", "directions", "place", "lat", "lng",
+                "accessible", "changing_table", "unisex", "source", "photo",
+                report.directions, report.place, report.lat, report.lng,
+                report.accessible, report.changing_table, report.unisex, report.source, link
             ];
             query = "INSERT INTO ??(??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?)";
         } else {
             table = [
-                "reports", "why", "place", "lat", "lng",
-                "what", "which",
-                report.why, report.place, report.lat, report.lng,
-                report.what, report.which
+                "reports", "directions", "place", "lat", "lng",
+                "accessible", "changing_table", "unisex", "source"
+                report.directions, report.place, report.lat, report.lng,
+                report.accessible, report.changing_table, report.unisex, report.source
             ];
             query = "INSERT INTO ??(??,??,??,??,??,??) VALUES (?,?,?,?,?,?)";
         }
