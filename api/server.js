@@ -181,11 +181,27 @@ router.post("/reports/nearby", function(req, res) {
                 res.status(500).json({
                     "error": err
                 });
-            } else if (rows.length < 1) {
-                res.sendStatus(204);
             } else {
-                res.json({
-                    "reports": rows
+                var url = refugeUrl + 'restrooms/by_location.json?lat=' + req.body.myLat + '&lng=' + req.body.myLng;
+                console.log(url);
+                request(url, function (error, response, body) {
+                    if (error) {
+                        console.error(error);
+                        res.json({
+                            "reports": rows
+                        });
+                    } else {
+                        console.log('body: ' + body);
+                        var refuge = prepRefuge(JSON.parse(body));
+                        rows = rows.concat(refuge);
+                        if (rows.length < 1) {
+                            res.sendStatus(204);
+                        } else {
+                            res.json({
+                                "reports": rows
+                            });
+                        }
+                    }
                 });
             }
         });
