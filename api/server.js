@@ -282,7 +282,7 @@ router.post("/reports", function(req, res) {
                 report.directions, report.place, report.lat, report.lng,
                 report.accessible, report.changing_table, report.unisex, report.source, link
             ];
-            query = "INSERT INTO ??(??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?)";
+            query = "INSERT INTO ??(??,??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?,?)";
         } else {
             table = [
                 "reports", "directions", "place", "lat", "lng",
@@ -290,7 +290,7 @@ router.post("/reports", function(req, res) {
                 report.directions, report.place, report.lat, report.lng,
                 report.accessible, report.changing_table, report.unisex, report.source
             ];
-            query = "INSERT INTO ??(??,??,??,??,??,??) VALUES (?,?,?,?,?,?)";
+            query = "INSERT INTO ??(??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?)";
         }
         query = mysql.format(query, table);
         connection.acquire(function(err, con) {
