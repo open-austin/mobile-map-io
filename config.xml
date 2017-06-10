@@ -71,5 +71,8 @@
     </platform>
     <icon src="resources/ios/icon/icon-small@3x.png" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.0" />
-    <plugin name="cordova-plugin-console" spec="~1.0.4" />
+    <plugin name="cordova-plugin-device" spec="~1.1.6" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.2.3" />
+    <plugin name="cordova-plugin-console" spec="~1.0.7" />
+    <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
 </widget>
